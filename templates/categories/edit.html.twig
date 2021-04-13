@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la categorie{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('categorie') }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier la categorie</h1>
+
+    {{ include('categories/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="button4" href="{{ path('categories_show') }}">Retour</a>
+
+    <a {{ include('categories/_delete_form.html.twig') }} </a>
+{% endblock %}

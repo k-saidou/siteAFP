@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre actualitée{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('actualite') }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier votre actualitée</h1>
+
+    {{ include('actualites/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="button4" href="{{ path('actualites_index') }}">Retour</a>
+
+    {{ include('actualites/_delete_form.html.twig') }}
+{% endblock %}

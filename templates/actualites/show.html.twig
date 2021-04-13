@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualites{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('actualite') }}{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="card mb-3">
+        <img class="card-img-top" src="{{ asset('uploads/brochures/' ~ actualite.image) }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ actualite.titre }}</h5>
+                <p class="card-text">{{ actualite.description | raw }}</p>
+                <p class="card-text"><small class="text-muted">Ecrit le {{ actualite.dateAt ? actualite.dateAt|date('d-m-y H:i:s') : '' }}</small></p>
+        </div>
+            <p>
+                <a class="button4" href="{{ path('actualites_index') }}">Retour</a>
+{% if is_granted('ROLE_USER') %}
+
+
+        {% if app.user.id == actualite.iduser.id %}
+
+                <a class="button2" href="{{ path('actualites_edit', {'id': actualite.id}) }}">Modifier</a>
+                <form method="post" action="{{ path('actualites_delete', {'id': actualite.id}) }}" onsubmit="return confirm('êtes vous sur de vouloir supprimmer cette actualité ?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ actualite.id) }}">
+                    <button class="button3">Supprimer</button>
+                </form>
+            </p>
+{% endif %}
+
+{% endif %}
+
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ actualite.commentaires | length }} Commentaires :</h1>
+                {% for commentaire in actualite.commentaires %}
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" style="border:1px solid black;">
+                        <h5>{{commentaire.retourcom}}</h5>
+                    </div>
+                    <div class="col-md-12">
+                        {{commentaire.contenu | raw}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <hr />
+
+        {% endfor %}
+{% if is_granted('ROLE_USER') %}
+
+
+
+        <div class="container" style="border:1px solid black;">
+
+            {{ form_start(commentaireForm, {'action': "#" , 'attr': {'id': 'myform'}}) }}      
+                     
+            {{ form_widget(commentaireForm) }}
+
+                  <button class="button4" onclick="myFunction()">{{ button_label|default('Save') }}</button>
+            {{ form_end(commentaireForm) }}
+        </div>
+
+<script>
+        function myFunction()
+            {
+                $.ajax({
+                type:"GET",
+                url: "{{ path('actualites_show', {'id':actualite.id}) }}",
+            
+                success:function(data)
+                {
+                        $("#myform")[0].reset();
+                        // alert(' ');
+                },
+                error : function()
+                {
+                    //alert('Erreur du script PHP');
+                }
+                });		
+            }
+</script>
+{% endif %}
+
+</section>
+
+
+{% endblock %}

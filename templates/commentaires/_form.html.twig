@@ -1,0 +1,6 @@
+{{ form_start(commentaireForm, {'action': path('commentaires_new'), 'method': 'GET'}) }}
+     
+    {{ form_widget(commentaireForm) }}
+    <button class="button4">{{ button_label|default('Save') }}</button>
+{{ form_end(commentaireForm) }}
+

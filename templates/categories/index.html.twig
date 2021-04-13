@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories index{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('categorie') }}{% endblock %}
+
+{% block body %}
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container-fluid">
+          <h1 class="display-3">CATEGORIES</h1>
+          <p></p>
+        </div>
+      </div>
+</main>
+
+
+<div class="container">
+  <div class="row">
+  {% for category in categories %}
+    <div class="col-sm-6 col-md-4 d-flex">
+      <div class="card-deck">
+      <div class="card">
+        <img src="{{ asset('uploads/brochures/' ~ category.image) }}" height="250" width="250" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ category.__toString | u.truncate(40, '...', false) }}</h5>
+            <p class="card-text"></p>
+            <a class="button1" href="{{ path('categories_show', {'id': category.id}) }}" role="button">Voir plus &raquo;</a>
+            {% if is_granted('ROLE_ADMIN') %}
+              <a class="button2" href="{{ path('categories_edit', {'id': category.id}) }}">Modifier</a>
+              <a {{ include('categories/_delete_form.html.twig', {'id': category.id}) }} </a>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+  {% endfor %}
+  </div>
+</div>
+
+{% if is_granted('ROLE_ADMIN') %}
+	<div class="container-fluid">
+		<a class="btn btn-primary" href="{{ path('categories_new') }}">Nouvelle Categorie</a>
+	</div>
+{% endif %}
+{% endblock %}

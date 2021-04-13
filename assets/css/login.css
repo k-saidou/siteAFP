@@ -1,0 +1,80 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+*{
+    margin:0;
+}
+
+body, html{
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+body{
+    min-height: 100%;
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    background: rgb(40,55,71);
+    background: linear-gradient(90deg, rgba(40,55,71,1) 0%, rgba(52,73,94,1) 50%, rgba(40,55,71,1) 100%);
+}
+
+footer{
+
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    margin-top: 5%;
+    background-color: rgb(31, 97, 141);
+}
+
+        .container{
+            position: relative;
+        }
+        a{
+         text-decoration:none !important;
+         }
+         h1,h2,h3{
+         font-family: 'Kaushan Script', cursive;
+         }
+          .myform{
+		position: relative;
+		display: -ms-flexbox;
+		display: flex;
+		padding: 1rem;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		width: 100%;
+		pointer-events: auto;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid rgba(0,0,0,.2);
+		border-radius: 1.1rem;
+		outline: 0;
+		max-width: 500px;
+		 }
+         .tx-tfm{
+         text-transform:uppercase;
+         }
+         .mybtn{
+         border-radius:50px;
+         }
+        
+         .login-or {
+         position: relative;
+         color: #aaa;
+         margin-top: 10px;
+         margin-bottom: 10px;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         }
+        
+        
+       
+          form .error {
+         color: #ff0000;
+         }
+         #second{display:none;}

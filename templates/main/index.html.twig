@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('main') }}{% endblock %}
+
+{% block body %}
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">BIENVENUE SUR LE BLOG AFP</h1>
+          <p>Je suis heureux de vous présenter – enfin ! – mon blog. Je souhaite à travers ce blog partager avec vous à propos de la photo au sens large. Evidemment à propos de l’actualité de la photo panoramique, de la gestion des couleurs, de technique photo mais aussi d’expositions, de livres photo, d’articles dans la presse, de conseils glanés ici ou là… et plein d’autres choses encore.</p>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="containers">
+        <div class="row">
+          {% for actualite in actualites %}
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card-deck">
+              <div class="card" >
+                <img src="{{ asset('uploads/brochures/' ~ actualite.image) }}" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">{{ actualite.titre | u.truncate(10,'...', false) }}</h5>
+                  <p class="card-text">{{ actualite.description | u.truncate(100, '...', false) }}</p>
+                  <a href="{{ path('actualites_show', {'id': actualite.id}) }}" class="button1">voir plus</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div> <!-- /container -->
+{% endblock %}

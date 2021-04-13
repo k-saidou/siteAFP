@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('categorie') }}{% endblock %}
+
+{% block body %}
+    <h1>Categories</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><h1>{{ category.__toString }}</h1></td>
+            </tr>
+        </tbody>
+    </table>
+
+        <h1>Actualites :</h1>
+
+        <div class="container">
+            <div class="row">
+            {% for actualite in actualites %}
+                <div class="col-sm-6 col-md-4 d-flex">
+                    <div class="card-deck">
+                        <div class="card">
+                            <img src="{{ asset('uploads/brochures/' ~ actualite.image) }}" class="card-img">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ actualite.titre }}</h5>
+                                <p class="card-text"> {{ actualite.description | raw | u.truncate(200,'...',false )}}</p>
+                                <p class="card-text"><small class="text-muted">Ecrit le {{ actualite.dateAt ? actualite.dateAt|date('Y-m-d H:i:s') : '' }}</small></p>
+                                <p><a class="button1" href="{{ path('actualites_show', {'id': actualite.id}) }}" role="button">Voir plus &raquo;</a>                     
+                                {% if is_granted('ROLE_USER') %}
+                                    {% if app.user.id == actualite.iduser.id %}
+                                <a class="button2" href="{{ path('actualites_edit', {'id': actualite.id}) }}">Modifier</a></p>                        
+                                    {% endif %}     
+                                {% endif %}   
+                            </div> 
+                        </div>            
+                    </div>
+                </div>
+            {% else %}
+                    <tr><td colspan="6">no records found</td></tr>
+           {% endfor %}
+            </div> 
+        </div>
+    {% if is_granted('ROLE_USER') %}
+        <div class="container">
+            <a class="button5" href="{{ path('actualites_new') }}">Ajouter une actualité </a>
+        </div>    
+    {% endif %} 
+    
+    <a class="button4" href="{{ path('categories_index') }}">Retour</a>
+
+    
+   
+
+{% endblock %}

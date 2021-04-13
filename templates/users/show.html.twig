@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+
+{% block body %}
+    <h1>Users</h1>
+
+<div class="container">
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Image</th>
+			<th scope="col">Nom</th>
+			<th scope="col">Prenom</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>  
+            <th scope="row">{{ user.id }}</th>
+			<td>{{ user.image }}</td>
+			<td>{{ user.firstname }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.adresse }}</td>
+            <td>{{ user.email }}</td>
+		</tr>
+	</tbody>
+</table>
+
+    <a class="button4" href="{{ path('users_index') }}">Retour à la liste</a>
+
+    <a class="button2" href="{{ path('users_edit', {'id': user.id}) }}">Modifier</a>
+
+    <a {{ include('users/_delete_form.html.twig') }}</a>
+</div>
+{% endblock %}

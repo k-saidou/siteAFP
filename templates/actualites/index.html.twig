@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualites index{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('actualite') }}{% endblock %}
+
+{% block body %}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <h1 class="display-3">ACTUALITES</h1>
+</div>
+
+<div class="container">
+	<div class="row">
+		{% for actualite in actualites %}
+			<div class="col-sm-6 col-md-4 d-flex">
+				<div class="card-deck">
+					<div class="card">
+						<img src="{{ asset('uploads/brochures/' ~ actualite.image) }}" height="250" width="250" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">{{ actualite.titre }}</h5>
+							<p class="card-text">{{ actualite.description | u.truncate(200, '...', false) }}</p>
+                            <p class="card-text"><small class="text-muted">Ecrit le {{ actualite.dateAt ? actualite.dateAt|date('Y-m-d H:i:s') : '' }}</small></p>
+                            <a href="{{ path('actualites_show', {'id': actualite.id}) }}" class="button1">voir plus</a>
+                                {% if is_granted('ROLE_USER') %} 
+                                                
+                                {% if app.user.id == actualite.iduser.id %}
+                                <a class="button2" href="{{ path('actualites_edit', {'id': actualite.id}) }}">Modifier</a></p>                        
+                                
+                                {% endif %}
+                                {% endif %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<!-- /container -->
+
+{% if is_granted('ROLE_USER') %}
+<div class="container">
+    <a class="btn btn-primary" href="{{ path('actualites_new') }}">Create new</a>
+</div>    
+{% endif %} 
+
+{% endblock %}

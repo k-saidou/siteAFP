@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Actualites{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('actualite') }}{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une Actualite</h1>
+
+    {{ include('actualites/_form.html.twig') }}
+
+    <a class="button4" href="{{ path('actualites_index') }}">Retour</a>
+{% endblock %}
